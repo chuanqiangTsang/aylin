@@ -23,9 +23,10 @@ app.use(bodyParser.json({
 	limit : config.bodyLimit
 }));
 
+// console.log(process.env.mode)
+
 // connect to db
 initializeDb( db => {
-	console.log('db connected succeed!');
 		// internal middleware
 		app.use(middleware({ config }));
 
