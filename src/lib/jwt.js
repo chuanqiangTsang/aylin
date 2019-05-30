@@ -6,7 +6,7 @@ class Jwt {
   /**
    * token生成器
    * @param data 需要存入token的数据
-   * @param exp 过期时间，毫秒计
+   * @param exp 过期时间，以秒计
    * @return token
    */
   tokenGenerator(data, exp){

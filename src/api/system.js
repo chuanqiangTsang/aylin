@@ -10,14 +10,14 @@ export default ({ db }) => {
     sysApi.get('/login', (req, res) => {
         const json = new Respone();
         // 生成token返回给前端
-        const token = Jwt.tokenGenerator({name: 'user'}, 60 * 60 * 24 * 1000);
-        json.data = {token, exp: 60 * 60 * 24 * 1000};
+        const token = Jwt.tokenGenerator({name: 'user'}, 60 * 60);
+        json.data = {token, exp: 60 * 60};
         res.json(json);
     })
 
     // 测试token
     sysApi.get('/testjwt', (req, res) => {
-        const token = req.get('Authorization');
+        const token = req.get('Authorization').split(' ')[1];
         const json = new Respone();
         
         const isTokenOk = Jwt.tokenVerifier(token);
