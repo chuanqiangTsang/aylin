@@ -3,6 +3,8 @@ import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
 import bodyParser from 'body-parser';
+import session from 'express-session';
+
 import initializeDb from './db';
 import middleware from './middleware';
 import setApi from './models/api';
@@ -16,17 +18,28 @@ app.use(morgan('dev'));
 
 // 3rd party middleware
 app.use(cors({
-	exposedHeaders: config.corsHeaders
+	exposedHeaders: config.corsHeaders,
+	credentials: true,
+	origin: 'http://localhost:8080'
 }));
 
 app.use(bodyParser.json({
 	limit : config.bodyLimit
 }));
 
+app.use(session({
+	resave: false, // don't save session if unmodified  
+	saveUninitialized: false, // don't create session until something stored  
+	secret: 'aylin'
+}))
+
 // console.log(process.env.mode)
 
 // connect to db
 initializeDb( db => {
+
+
+
 		// internal middleware
 		app.use(middleware({ config }));
 

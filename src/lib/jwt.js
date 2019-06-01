@@ -21,10 +21,10 @@ class Jwt {
    */
   tokenVerifier(token){
     try { 
-      jwt.verify(token, config.secret);
-      return true;
+      const data = jwt.verify(token, config.secret);
+      return data;
     } catch(e) {
-      return false;
+      return null;
     }
   }
 }

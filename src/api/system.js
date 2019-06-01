@@ -1,5 +1,7 @@
 import { Router } from 'express';
 import Respone from './base/respone';
+import dbError from './base/dberror';
+import errcodeMap from './base/errcodes';
 
 import Jwt from '../lib/jwt';
 
@@ -7,11 +9,38 @@ export default ({ db }) => {
     let sysApi = Router();
 
     // 登录
-    sysApi.get('/login', (req, res) => {
+    sysApi.post('/login', (req, res) => {
+        const { username, password } = req.body;
+
+        // 查询数据库
+        let sql = `select * from user where username = '${username}' and password = '${password}'`;
         const json = new Respone();
-        // 生成token返回给前端
-        const token = Jwt.tokenGenerator({name: 'user'}, 60 * 60);
-        json.data = {token, exp: 60 * 60};
+        db.query(sql, (err, rows, fidles) => {
+            if(err){
+                dbError(res);
+            } else {
+                if (rows.length === 0) {
+                    json.errcode = errcodeMap.loginError;
+                    json.errmsg = '用户名或密码错误'
+                } else {
+                    // 用户信息存入session
+                    req.session.userInfo = rows[0];
+
+                    const token = Jwt.tokenGenerator({userInfo: rows[0]}, 60 * 60);
+                    json.errcode = errcodeMap.success;
+                    json.data = {token, exp: 60 * 60};
+                    json.errmsg = '登录成功';
+                }
+                res.json(json);
+            }
+        })
+    });
+
+    sysApi.get('/logout', (req, res) => {
+        const { session } = req;
+        session.destroy();
+        const json = new Respone();
+        json.errcode = errcodeMap.success;
         res.json(json);
     })
 
