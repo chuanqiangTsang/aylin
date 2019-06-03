@@ -33,7 +33,7 @@ app.use(session({
 	secret: 'aylin'
 }))
 
-// console.log(process.env.mode)
+// console.log(process.env.NODE_ENV)
 
 // connect to db
 initializeDb( db => {

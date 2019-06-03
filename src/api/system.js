@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import Respone from './base/respone';
-import dbError from './base/dberror';
+import { dbErrorHandler } from './base/dberror';
 import errcodeMap from './base/errcodes';
 
 import Jwt from '../lib/jwt';
@@ -17,7 +17,7 @@ export default ({ db }) => {
         const json = new Respone();
         db.query(sql, (err, rows, fidles) => {
             if(err){
-                dbError(res);
+                dbErrorHandler(res);
             } else {
                 if (rows.length === 0) {
                     json.errcode = errcodeMap.loginError;

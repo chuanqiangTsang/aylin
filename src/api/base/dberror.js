@@ -1,6 +1,6 @@
 import Resopne from './respone';
 export default {
-    dberror(res){
+    dbErrorHandler(res){
         const json = new Resopne();
         res.status(500);
         res.errcode = 50000;
