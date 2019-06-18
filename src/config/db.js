@@ -1,8 +1,8 @@
 
-const host = process.env.NODE_ENV === 'dev' ? 'todo' : 'localhost';
-const password = process.env.NODE_ENV === 'dev' ? 'todo' : '123456';
+const host = process.env.NODE_ENV === 'dev' ? '188.131.241.66' : 'localhost';
+const password = process.env.NODE_ENV === 'dev' ? '123456' : '123456';
 export default {
-    host     : host,
+    host     : '188.131.241.66',
     user     : 'root',
     password,
     database : 'aylin'
