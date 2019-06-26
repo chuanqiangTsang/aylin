@@ -20,7 +20,7 @@ app.use(morgan('dev'));
 app.use(cors({
 	exposedHeaders: config.corsHeaders,
 	credentials: true,
-	origin: 'http://localhost:8080'
+	origin: 'http://localhost:8081'
 }));
 
 app.use(bodyParser.json({
