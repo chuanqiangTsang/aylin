@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import Respone from './base/respone';
+import Respone from '../lib/respone';
 import { dbErrorHandler } from './base/dberror';
 import errcodeMap from './base/errcodes';
 

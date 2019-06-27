@@ -1,9 +1,6 @@
-import { Router } from 'express';
+import tokenValidator from './tokenValidator';
 
-export default ({ config, db }) => {
-	let routes = Router();
-
-	// add middleware here
-
-	return routes;
-}
+// add middleware here
+export default [
+	tokenValidator
+]

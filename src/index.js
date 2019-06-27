@@ -33,22 +33,20 @@ app.use(session({
 	secret: 'aylin'
 }))
 
-// console.log(process.env.NODE_ENV)
 
 // connect to db
 initializeDb( db => {
+	// internal middleware, and this is an Array, which includes all customrize middleware
+	middleware.forEach(middleware => {
+		app.use(middleware);
+	})
 
+	// api router
+	setApi(app, db);
 
-
-		// internal middleware
-		app.use(middleware({ config }));
-
-		// api router
-		setApi(app, db);
-	
-		app.server.listen(process.env.PORT || config.port, () => {
-			console.log(`Started on port ${app.server.address().port}`);
-		});
+	app.server.listen(process.env.PORT || config.port, () => {
+		console.log(`Started on port ${app.server.address().port}`);
+	});
 });
 
 export default app;

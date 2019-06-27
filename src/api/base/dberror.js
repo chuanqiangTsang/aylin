@@ -1,4 +1,4 @@
-import Resopne from './respone';
+import Resopne from '../../lib/respone';
 export default {
     dbErrorHandler(res){
         const json = new Resopne();
