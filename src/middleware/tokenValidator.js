@@ -18,9 +18,13 @@ function tokenValidator(req, res, next) {
       json.errcode = 40000;
       json.errmsg = 'Authentication Failed';
       res.json(json);
+      return;
+    } else {
+      next();
     }
+  } else {
+    next();
   }
-  next();
 }
 
 export default tokenValidator;

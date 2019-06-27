@@ -5,5 +5,6 @@ export default {
     host     : '188.131.241.66',
     user     : 'root',
     password,
-    database : 'aylin'
+    database : 'aylin',
+    multipleStatements: true
 }

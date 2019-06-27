@@ -1,7 +1,14 @@
 export default class Respone {
-    constructor(){
+    constructor(type){
         this.errcode = 0;
         this.errmsg = '';
-        this.data = '';
+        if (type === 'withPage') {
+            this.data = {
+                list: [],
+                total: 0
+            }
+        } else {
+            this.data = '';
+        }
     }
 }
